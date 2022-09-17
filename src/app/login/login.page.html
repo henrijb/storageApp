@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <div class="center">
+
+    <ion-card>
+      <img src="assets/Logo.png" alt="logo">
+      <!-- <ion-card-title class="ion-text-center">App Henrique</ion-card-title> -->
+      
+      <ion-item lines="nome">
+        <ion-label position="floating">e-mail</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item lines="nome">
+        <ion-label position="floating">senha</ion-label>
+        <ion-input type="password" [(ngModel)]="senha"></ion-input>
+      </ion-item>
+      <ion-button expand="full" fill="outline" (click)="login()">Entrar</ion-button>
+      <ion-button expand="full" fill="clear">Registrar</ion-button>
+    </ion-card>
+  </div>
+</ion-content>
