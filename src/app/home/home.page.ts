@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Usuario } from '../models/Usuario';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  listaUsuarios: Usuario[] = [];
 
+  constructor(private storage: StorageService) {}
+
+  async buscarUsuarios() {
+    this.listaUsuarios = await this.storage.getAll();
+  }
+
+  ionViewDidEnter() {
+    this.buscarUsuarios();
+  }
+
+  async excluirCadastro(email: string){
+    await this.storage.remove(email);
+    this.buscarUsuarios();
+  }
 }
