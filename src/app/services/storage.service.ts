@@ -23,7 +23,7 @@ export class StorageService {
   }
 
   public get(key: string) {
-    this._storage?.get(key);
+    return this._storage?.get(key);
   }
 
   public remove(key: string) {
@@ -45,5 +45,20 @@ export class StorageService {
 
   public async cleanRegister() {
     await this._storage?.clear();
+  }
+
+  public getAllLogins(email: string, senha: string) {
+
+    this._storage.forEach( (value) => {
+      if(value.tipo === 'login') {
+        console.log(value.tipo)
+        if(value.email.includes(email) && value.senha.includes(senha)) {
+          console.log(value.email)
+          console.log(value.senha)
+          return  true;
+        }
+      }
+    });
+    return false;
   }
 }

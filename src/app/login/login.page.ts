@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,23 @@ export class LoginPage implements OnInit {
 
   email: string;
   senha: string;
+  allDataLogins: Array<string> = [];
 
 
-  constructor(private toastController: ToastController, private route: Router) { }
+  constructor(
+    private toastController: ToastController,
+    private route: Router,
+    private storageService: StorageService, 
+    ) { }
 
   ngOnInit() {
   }
 
-  login() {
-    if(this.email === "henrijb@gmail.com" && this.senha === '102030') {
+  login() {    
+
+    console.log(this.storageService.getAllLogins(this.email, this.senha))
+
+    if(this.storageService.getAllLogins(this.email, this.senha)) {
       this.presentToast('Bem Vindo', 'success');
       this.route.navigateByUrl('/home');
     } else {

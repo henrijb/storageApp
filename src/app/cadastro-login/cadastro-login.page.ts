@@ -73,7 +73,8 @@ export class CadastroLoginPage implements OnInit {
   
       await this.storageService.set( 
         ((await this.storageService.countRegister()) + 1).toString(),
-        this.usuarioLogin);
+        this.usuarioLogin
+      );
 
       this.route.navigateByUrl('/home');
 
