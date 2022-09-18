@@ -3,4 +3,5 @@ export class Usuario {
     cpf: string;
     email: string;
     senha: string;
+    tipo:string;
 }

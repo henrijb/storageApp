@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root',
 })
+
 export class StorageService {
   private _storage: Storage | null = null;
 
@@ -39,7 +40,7 @@ export class StorageService {
   }
 
   public countRegister() {
-    return this._storage?.length();
+   return this._storage?.length();
   }
 
   public async cleanRegister() {

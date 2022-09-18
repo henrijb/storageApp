@@ -7,15 +7,14 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.page.html',
-  styleUrls: ['./cadastro.page.scss'],
+  selector: 'app-cadastro-login',
+  templateUrl: './cadastro-login.page.html',
+  styleUrls: ['./cadastro-login.page.scss'],
 })
-export class CadastroPage implements OnInit {
 
-  formCadastro: FormGroup;
-  usuario: Usuario = new Usuario();
-
+export class CadastroLoginPage implements OnInit {
+  formCadastroLogin: FormGroup;
+  usuarioLogin: Usuario = new Usuario();
   mensagens = {
     nome: [
       { tipo: 'required', mensagem: 'O campo Nome é obrigatório.' },
@@ -45,9 +44,9 @@ export class CadastroPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private storageService: StorageService, 
-    private route: Router) { 
+    private route: Router) {
 
-    this.formCadastro = this.formBuilder.group({
+    this.formCadastroLogin = this.formBuilder.group({
       nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       cpf: ['', Validators.compose([Validators.required, CpfValidator.cpfValido])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -57,23 +56,25 @@ export class CadastroPage implements OnInit {
     {
       Validators: comparaValidator('senha','confirmarSenha')
     });
-  }
+   }
 
   ngOnInit() {
   }
-
+  
   async salvarCadastro() {
-    //console.log('Formulario', this.formCadastro.valid);
+    //console.log('Formulario', this.formCadastroLogin.valid);
 
-    if(this.formCadastro.valid) {
-      this.usuario.nome = this.formCadastro.value.nome;
-      this.usuario.cpf = this.formCadastro.value.cpf;
-      this.usuario.email = this.formCadastro.value.email;
-      this.usuario.senha = this.formCadastro.value.senha;
-
-      await this.storageService.set(
+    if(this.formCadastroLogin.valid) {
+      this.usuarioLogin.nome = this.formCadastroLogin.value.nome;
+      this.usuarioLogin.cpf = this.formCadastroLogin.value.cpf;
+      this.usuarioLogin.email = this.formCadastroLogin.value.email;
+      this.usuarioLogin.senha = this.formCadastroLogin.value.senha;
+      this.usuarioLogin.tipo = 'login';
+  
+      await this.storageService.set( 
         ((await this.storageService.countRegister()) + 1).toString(),
-        this.usuario);
+        this.usuarioLogin);
+
       this.route.navigateByUrl('/home');
 
     } else{

@@ -27,6 +27,10 @@ export class LoginPage implements OnInit {
     }
   }
 
+  registrarUsuario() {
+    this.route.navigateByUrl('/cadastro-login');
+  }
+
   async presentToast(texto: string, cor: string) {
     const toast = await this.toastController.create({
       message: texto,
